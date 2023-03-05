@@ -15,18 +15,37 @@ export class App extends Component {
     filter: '',
   };
 
+  // componentDidUpdate(prevProps, prevState) {
+  //   const dataContacts = this.state.contacts;
+  //   if (this.state.contacts !== prevState.contacts) {
+  //     localStorage.setItem('contacts', JSON.stringify(dataContacts));
+  //   }
+  // }
+
   componentDidUpdate(prevProps, prevState) {
-    const dataContacts = this.state.contacts;
     if (this.state.contacts !== prevState.contacts) {
+      const dataContacts = this.state.contacts;
       localStorage.setItem('contacts', JSON.stringify(dataContacts));
     }
   }
 
+  // componentDidMount() {
+  //   const stringifiContacts = localStorage.getItem('contacts');
+  //   const parsedContacts = JSON.parse(stringifiContacts);
+  //   if (parsedContacts) {
+  //     this.setState({ contacts: parsedContacts });
+  //   }
+  // }
+
   componentDidMount() {
-    const stringifiContacts = localStorage.getItem('contacts');
-    const parsedContacts = JSON.parse(stringifiContacts);
-    if (parsedContacts) {
-      this.setState({ contacts: parsedContacts });
+    try {
+      const stringifiedContacts = localStorage.getItem('contacts');
+      const parsedContacts = JSON.parse(stringifiedContacts);
+      if (parsedContacts) {
+        this.setState({ contacts: parsedContacts });
+      }
+    } catch (error) {
+      console.error('Error while reading contacts from local storage: ', error);
     }
   }
 
