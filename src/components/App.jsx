@@ -88,10 +88,19 @@ export class App extends Component {
 
   getFilteredContacts = () => {
     const { contacts, filter } = this.state;
+    const lowerCaseFilter = filter ? filter.toLowerCase() : '';
+
     return contacts.filter(contact =>
-      contact.name.toLowerCase().includes(filter.toLowerCase())
+      contact.name.toLowerCase().includes(lowerCaseFilter)
     );
   };
+
+  // getFilteredContacts = () => {
+  //   const { contacts, filter } = this.state;
+  //   return contacts.filter(contact =>
+  //     contact.name.toLowerCase().includes(filter.toLowerCase())
+  //   );
+  // };
 
   render() {
     const { filter } = this.state;
